@@ -1,0 +1,24 @@
+# Windows Failed Login Investigation
+
+## Status
+Planned.
+
+## Objective
+Simulate failed authentication attempts in a local Windows environment and investigate the associated security events.
+
+## Planned Evidence
+- Windows Event Viewer
+- Security Event ID 4625
+- Timestamps
+- Account names
+- Source workstation details
+
+## Planned Deliverables
+- Event log screenshots
+- Investigation notes
+- Timeline of activity
+- Short incident-triage report
+- Recommended response actions
+
+## Skills Being Developed
+Log analysis, authentication monitoring, incident triage, Windows security events, and documentation.
