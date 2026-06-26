@@ -37,5 +37,16 @@ Request: Provide department access to a shared folder.
 Action: Created the Finance-Shared folder and assigned share and NTFS permissions.  
 Resolution: Finance group granted modify access without full control.
 
+## Screenshots
+
+### IT Users and Security Groups
+![IT users and security groups](ad-it-users-groups.png)
+
+### Finance Users and Security Group
+![Finance users and security group](ad-finance-users-group.png)
+
+### Finance Shared Folder Permissions
+![Finance shared folder permissions](finance-shared-permissions.png)
+
 ## Skills Demonstrated
 Active Directory, Windows Server administration, user provisioning, password resets, account enablement, security groups, access control, shared-folder permissions, DNS fundamentals, and technical documentation.
