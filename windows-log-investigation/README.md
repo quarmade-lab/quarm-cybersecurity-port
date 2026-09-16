@@ -31,21 +31,21 @@ Log analysis, authentication monitoring, incident triage, Windows security event
 
 
 ## Screenshots
-![evidence screenshots](Screenshot 2026-09-16 151450.png)
+![evidence screenshots](Screenshot1.png)
 
-![evidence screenshots](Screenshot 2026-09-16 151938.png)
+![evidence screenshots](Screenshot2.png)
 
-![evidence screenshots](Screenshot 2026-09-16 155345.png)
+![evidence screenshots](Screenshot3.png)
 
-![evidence screenshots](Screenshot 2026-09-16 155422.png)
+![evidence screenshots](Screenshot4.png)
 
-![evidence screenshots](Screenshot 2026-09-16 155519.png)
+![evidence screenshots](Screenshot5.png)
 
-![evidence screenshots](Screenshot 2026-09-16 155536.png)
+![evidence screenshots](Screenshot6.png)
 
-![evidence screenshots](Screenshot 2026-09-16 155831.png)
+![evidence screenshots](Screenshot7.png)
 
-![evidence screenshots](Screenshot 2026-09-16 155905.png)
+![evidence screenshots](Screenshot8.png)
 
 
 
