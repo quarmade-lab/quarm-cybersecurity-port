@@ -49,4 +49,4 @@ None of these attempts actually got in, which is good, but I also never saw a lo
 2. It'd be worth setting up an alert for this kind of pattern (several failed logins on the same account in a short window) instead of having to notice it manually in Event Viewer, like I did here.
 
 ---
-*Screenshots referenced in this investigation: see `/evidence` in this folder.*
+*Screenshots referenced in this investigation: see `/README.md` in this folder.*
