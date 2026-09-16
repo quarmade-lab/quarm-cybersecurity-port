@@ -28,3 +28,24 @@ Simulate failed authentication attempts in a local Windows environment and inves
 
 ## Skills Being Developed
 Log analysis, authentication monitoring, incident triage, Windows security events, and documentation.
+
+
+## Screenshots
+![evidence screenshots](Screenshot 2026-09-16 151450.png)
+
+![evidence screenshots](Screenshot 2026-09-16 151938.png)
+
+![evidence screenshots](Screenshot 2026-09-16 155345.png)
+
+![evidence screenshots](Screenshot 2026-09-16 155422.png)
+
+![evidence screenshots](Screenshot 2026-09-16 155519.png)
+
+![evidence screenshots](Screenshot 2026-09-16 155536.png)
+
+![evidence screenshots](Screenshot 2026-09-16 155831.png)
+
+![evidence screenshots](Screenshot 2026-09-16 155905.png)
+
+
+
