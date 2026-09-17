@@ -50,8 +50,3 @@ Log analysis, authentication monitoring, incident triage, Windows security event
 ![evidence screenshots](Screenshot9.png)
 
 ![evidence screenshots](Screenshot10.png)
-
-![evidence screenshots](Screenshot11.png)
-
-
-
