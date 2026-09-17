@@ -21,4 +21,4 @@ Planned — analysis of simulated Windows authentication failures using Event Vi
 
 ## Contact
 - LinkedIn: https://www.linkedin.com/in/quarm-adeniran-8b6895419/
-- Email: quarmade@gmail.com
+- Email: quarm1608@gmail.com
