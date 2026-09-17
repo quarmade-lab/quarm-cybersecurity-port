@@ -48,5 +48,17 @@ None of these attempts actually got in, which is good, but I also never saw a lo
 1. Set up an account lockout policy (e.g., lock the account after 5 bad password attempts within 15 minutes) — right now nothing stops someone from just guessing passwords over and over.
 2. It'd be worth setting up an alert for this kind of pattern (several failed logins on the same account in a short window) instead of having to notice it manually in Event Viewer, like I did here.
 
----
+Update — Recommendation #1 Implemented and Verified
+
+I went back and actually did this instead of just leaving it as a suggestion.
+
+What I did: Created a GPO (Account-Lockout-Policy) and set the account lockout threshold to 5 invalid attempts, 30-minute lockout duration.
+
+What went wrong the first few tries, and how I fixed it: the policy didn't apply at first even though it looked correctly linked and enabled. Using gpresult /h to check exactly which GPO was winning each setting, I found that a separate built-in GPO (Default Domain Policy) was also defining the lockout threshold — set to 0 — and it was taking priority over mine because of GPO link order. I moved the setting into Default Domain Policy directly (the standard place for account policies) instead of fighting the precedence order, then ran gpupdate /force to push it out immediately.
+
+How I confirmed it actually worked: ran the same runas wrong-password test as before. After 5 attempts, runas returned a new error — 1909: The referenced account is currently locked out — instead of the usual bad-password error. Event Viewer confirmed it with a new event type I hadn't captured before: Event ID 4740 (Account Lockout), showing testuser as the locked account.
+
+I then unlocked the account through Active Directory Users and Computers (Account tab → "Unlock account" checkbox) to restore access — the same step a help desk tech would take after confirming a lockout was legitimate user error rather than an attack.
+
+
 *Screenshots for this investigation are in `README.md` in this folder.*
