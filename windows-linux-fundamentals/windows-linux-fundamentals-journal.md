@@ -2,7 +2,7 @@
 
 ## What I was doing
 
-This is tab 02 from my career roadmap — getting solid on basic Windows and Linux administration before going deeper into SOC tools like Wazuh, which needs both.
+This is me getting solid on basic Windows and Linux administration before going deeper into SOC tools like Wazuh, which needs both.
 
 ## Windows side
 
@@ -30,7 +30,7 @@ Worked through it in parts:
 
 The plan was to check `/var/log/auth.log` and `/var/log/syslog`, the same way I'd checked Windows Event Viewer for Event ID 4625 earlier.
 
-*[FILL IN: Those files existed and had real entries in them — OR — Those files didn't exist at all on my system ("No such file or directory"), which I learned is normal on newer Ubuntu versions that rely on journald instead. Pick whichever actually happened and delete the other.]*
+Observation: Both /var/log/auth.log and /var/log/syslog existed on my Ubuntu system and contained real log entries. I used auth.log to review authentication-related activity and syslog to examine general system activity and search for errors.
 
 Either way, I used `journalctl` — `sudo journalctl -n 20` for general activity, and `sudo journalctl -u ssh -n 20` to see exactly what happened when I stopped and restarted SSH earlier in the session. Same idea as Event Viewer, just a different tool and a different format.
 
