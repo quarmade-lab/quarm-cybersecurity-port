@@ -1,6 +1,6 @@
 # Windows + Linux Fundamentals Cheat Sheet
 
-Quick reference from working through both sides of tab 02 — diagnostics, services, users, and logs on Windows and Ubuntu.
+Quick reference from working through — diagnostics, services, users, and logs on Windows and Ubuntu.
 
 ---
 
