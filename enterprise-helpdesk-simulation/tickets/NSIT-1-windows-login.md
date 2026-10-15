@@ -77,13 +77,26 @@ The exercise demonstrated:
 
 ## Evidence
 
-- `01-jira-service-desk-created.png`
-- `02-first-incident-created.png`
-- `03-ad-user-account-check.png`
-- `04-ad-account-status.png`
-- `05-authentication-event-check.png`
-- `06-failed-login-analysis.png`
-- `07-ad-password-reset-confirmation.png`
+### 01 — Jira Service Desk Setup
+![Jira Service Desk Setup](../evidence/01-jira-service-desk-created.png)
+
+### 02 — Incident Created
+![Incident Created](../evidence/02-first-incident-created.png)
+
+### 03 — Active Directory User Properties
+![AD User Properties](../evidence/03-ad-user-account-check.png)
+
+### 04 — Account Status Verification
+![AD Account Status](../evidence/04-ad-account-status.png)
+
+### 05 — Authentication Event Check
+![Event ID 4625](../evidence/05-authentication-event-check.png)
+
+### 06 — Failed Login Analysis
+![Failed Login Analysis](../evidence/06-failed-login-analysis.png)
+
+### 07 — Password Reset Confirmation
+![Password Reset Confirmation](../evidence/07-ad-password-reset-confirmation.png)
 
 ## Conclusion
 
