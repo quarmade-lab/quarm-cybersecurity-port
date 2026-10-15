@@ -10,7 +10,9 @@
 **Classification:** Incident  
 **Impact:** Single user  
 **Urgency:** Medium  
-**Status:** Lab password-reset procedure completed; user sign-in verification pending
+**Jira Status:** Pending — Awaiting user sign-in verification
+**Lab Exercise Status:** Password-reset procedure completed
+**Root Cause:** Not conclusively established
 
 ## Business Scenario
 
