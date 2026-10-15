@@ -102,9 +102,21 @@ The exercise demonstrates how to inspect Windows printing services and document 
 
 ![Windows Print Spooler service properties](../evidence/15-nsit6-print-spooler.png)
 
-### Printer Queue
+###Printer Queue Investigation
 
-Add a screenshot here only if the queue was inspected.
+Opened the Windows Print Queue to inspect pending print jobs.
+
+**Observed status:** No print jobs.
+
+**Pending jobs:** None visible.
+
+**Stuck jobs:** None observed.
+
+**Assessment:** No print queue backlog was present during testing. This does not rule out intermittent printing problems or issues affecting a different printer.
+
+### Evidence — Printer Queue
+
+![Windows Print Queue showing no pending jobs](../evidence/16-nsit6-printer-queue.png)
 
 ## Skills Demonstrated
 
