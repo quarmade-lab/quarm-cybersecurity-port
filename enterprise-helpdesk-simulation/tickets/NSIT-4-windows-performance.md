@@ -1,127 +1,43 @@
-# NSIT-4 — Windows Performance Troubleshooting
+# NSIT-4 — Slow Workstation
 
-## Project Overview
+**Type:** Incident · **Priority:** Medium · **Jira status:** Work in progress
 
-This lab simulates a Level 1 IT support investigation into a Windows workstation experiencing slow performance.
+## The ticket
 
-The objective is to use built-in Windows diagnostic tools to identify resource utilization patterns, investigate potential performance bottlenecks, and document findings through an ITIL-aligned service desk workflow.
+A fictional Administration employee reported slow app launches and a laptop that felt sluggish during normal work. I ran the checks on my own Windows 11 laptop, using Task Manager.
 
-## Ticket Information
+## What I found
 
-| Field | Value |
+**Performance tab**
+
+| Resource | Reading |
 |---|---|
-| Jira Ticket | NSIT-4 (verify actual ticket ID) |
-| Organization | Northstar Solutions (fictional) |
-| Ticket Type | Incident |
-| Priority | Medium |
-| ITIL Practice | Incident Management |
-| Status | In Progress |
-| Environment | Windows 11 workstation |
+| CPU (Intel Core Ultra 7 155H) | 2% utilization at 1.66 GHz |
+| Memory | 12.0 GB of 15.4 GB in use (78%) |
+| Disk 0 (C:, NVMe SSD) | 2% active time |
+| Processes | 320 |
+| Uptime | 3 days, 5 hours |
 
-## Reported Issue
+**Processes tab** — the biggest memory users:
 
-A fictional Administration employee reports that their workstation experiences slow application launches and reduced responsiveness during routine work.
-
-The support technician is tasked with reviewing system performance and identifying possible contributing factors.
-
-## Tools Used
-
-- Windows Task Manager
-- Performance monitoring
-- Running process inspection
-- Jira Service Management
-
-## Investigation Procedure
-
-### 1. CPU Utilization
-
-Opened Task Manager using `Ctrl + Shift + Esc` and navigated to the Performance tab.
-
-**Observed CPU:** Intel Core Ultra 7 155H  
-**Utilization:** Approximately 2–3%
-
-CPU activity was low during the observation period.
-
-### 2. Memory Utilization
-
-Reviewed memory consumption in Task Manager.
-
-**Memory in use:** 12.0 GB  
-**Usable memory:** 15.4 GB  
-**Utilization:** 78%
-
-Memory utilization was relatively elevated and may warrant further investigation if the device experiences slowdowns.
-
-### 3. Disk Utilization
-
-Reviewed disk activity in Task Manager.
-
-**Storage type:** NVMe SSD  
-**Observed disk activity:** Approximately 2%
-
-No sustained disk activity bottleneck was evident in the captured observation.
-
-### 4. Running Processes
-
-Inspected the Processes tab to identify applications consuming system resources.
-
-| Application | Approximate Memory Usage |
+| Process | Memory |
 |---|---|
-| Microsoft Edge | 1,527 MB |
-| Claude | 436 MB |
-| Photos | 308 MB |
+| Microsoft Edge (17 processes) | 1,527.1 MB |
+| Claude (10 processes) | 436.0 MB |
+| Photos (2 processes) | 308.1 MB |
 
-The system displayed approximately 320 running processes.
+## Result
 
-## Technical Assessment
+CPU and disk were close to idle, so neither was a bottleneck when I looked. Memory was the only thing worth flagging: 78% in use, with Edge alone using about 1.5 GB. That isn't a problem by itself. But if the user opened a few more heavy apps, the system could start paging to disk and feel slow.
 
-CPU and disk utilization were low during testing.
+The catch is that I took one snapshot while the laptop was running fine. To actually diagnose slowness, I'd need to watch Task Manager or Resource Monitor while the slowdown is happening. I'd also probably start with a restart after three days of uptime and look at trimming browser tabs or startup apps. I didn't make any of those changes, so the root cause is unconfirmed and the ticket stays in **Work in progress**.
 
-Memory utilization was relatively high at 78%, with multiple applications consuming memory.
+## Screenshots
 
-The screenshots did not establish a definitive cause of slow performance. Further investigation would require observing resource usage while symptoms occur.
+Performance overview:
 
-## Actions Completed
+![Task Manager performance tab](../evidence/11-nsit4-performance-overview.png)
 
-- [x] Opened Windows Task Manager
-- [x] Inspected CPU utilization
-- [x] Inspected memory utilization
-- [x] Inspected disk activity
-- [x] Reviewed running processes
-- [x] Documented diagnostic findings
-- [ ] Confirmed root cause
-- [ ] Verified resolution of the fictional employee's issue
+Running processes:
 
-## Outcome
-
-**Technical diagnostic exercise:** Completed.
-
-**Root cause:** Not conclusively established.
-
-**Incident resolution:** Not verified.
-
-The investigation demonstrates how a Level 1 support technician can use built-in Windows tools to evaluate workstation performance and document findings.
-
-## Evidence
-
-### Performance Overview
-
-![Windows Task Manager Performance Overview](../evidence/11-nsit4-performance-overview.png)
-
-### Running Processes
-
-![Windows Task Manager Running Processes](../evidence/12-nsit4-running-processes.png)
-
-## Skills Demonstrated
-
-- Windows 11 troubleshooting
-- Task Manager and system monitoring
-- CPU, memory, and disk analysis
-- Application resource investigation
-- Technical documentation
-- ITIL Incident Management
-- Jira Service Management
-
----
-
-*This is a fictional service desk scenario supported by real diagnostic observations from a personal Windows workstation.*
+![Task Manager processes tab](../evidence/12-nsit4-running-processes.png)

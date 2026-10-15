@@ -1,84 +1,36 @@
-# NSIT-5 — Software Installation and Verification
+# NSIT-5 — PDF Reader Request
 
-## Project Overview
+**Type:** Service request (Get IT help) · **Jira status:** In Progress
 
-This exercise simulates a Level 1 IT support request for a PDF reader. The technician checks software inventory, confirms whether installation is required, and performs an application functionality test.
+## The request
 
-## Ticket Information
+A fictional Finance employee asked for an approved PDF reader so they could open and review documents. Before installing anything, I checked whether a PDF reader was already on the machine. I ran the check on my own Windows 11 laptop.
 
-**Jira Ticket:** NSIT-5 (verify actual ticket ID)  
-**Ticket Type:** Service Request  
-**ITIL Practice:** Service Request Management  
-**Environment:** Windows 11 workstation  
-**Status:** In Progress
+## What I did
 
-## Business Scenario
+**Checked installed software.** In **Settings → Apps → Installed apps**, I searched for "adobe" and found:
 
-A fictional Finance employee requests a PDF reader to open and review business documents.
-
-The technician must confirm whether an approved application is already available before attempting a new installation.
-
-## Software Inventory Investigation
-
-Navigated to:
-
-**Windows Settings → Apps → Installed apps**
-
-Searched for Adobe applications.
-
-### Findings
-
-| Attribute | Result |
+| Field | Value |
 |---|---|
 | Application | Adobe Acrobat (64-bit) |
 | Version | 26.002.21931 |
-| Installation date | September 18, 2026 |
-| Installed size | 1.14 GB |
-| Installation required | No, application already present |
+| Installed | 2026-09-18 |
+| Size | 1.14 GB |
 
-## Functional Verification
+**Tested it.** I opened Acrobat and loaded a 9-page PDF. It displayed without errors.
 
-**Procedure:**
-1. Launched Adobe Acrobat.
-2. Opened a sample PDF document.
-3. Verified that the document displayed successfully.
+## Result
 
-**Result:** Passed — Adobe Acrobat opened and displayed a PDF document without an observed error.
+No installation was needed, because Acrobat was already installed and worked. I didn't install or change anything.
 
-## Technical Assessment
+On a real ticket, this is where I'd confirm with the user that they can open their own files, then close it. That confirmation can't happen here, so the ticket is still **In Progress**.
 
-Adobe Acrobat (64-bit), version 26.002.21931, was already installed on the tested Windows workstation.
+## Screenshots
 
-The application launched successfully and displayed a PDF document. No new installation was required.
+Acrobat in the installed apps list:
 
-## Outcome
+![Adobe Acrobat in Installed apps](../evidence/13-nsit5-software-installed.png)
 
-**Software inventory check:** Completed.  
-**Functional verification:** Passed.  
-**New installation performed:** No.  
-**Lab exercise:** Completed.  
-**Production request fulfilled:** Not verified; the fictional employee's workstation was not tested.
-
-## Evidence
-
-### Installed Software
-
-![Adobe Acrobat installed](../evidence/13-nsit5-software-installed.png)
-
-### Functional Test
+Acrobat displaying a PDF:
 
 ![Adobe Acrobat displaying a PDF](../evidence/14-nsit5-pdf-functional-test.png)
-
-## Skills Demonstrated
-
-- Windows software inventory
-- Application troubleshooting
-- Software request assessment
-- Functional verification
-- ITIL Service Request Management
-- Jira Service Management
-- Technical documentation
-
----
-
-*This exercise uses a fictional service request and actual software verification on a personal Windows workstation.*

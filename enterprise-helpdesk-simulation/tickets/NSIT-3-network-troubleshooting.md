@@ -1,83 +1,45 @@
-# NSIT-3 — Network and DNS Troubleshooting
+# NSIT-3 — Can't Access a Website (Network and DNS)
 
-## Ticket Information
+**Type:** Incident · **Priority:** Medium · **Jira status:** Work in progress
 
-**Jira Ticket:** NSIT-3 (confirm actual ID)  
-**Organization:** Northstar Solutions (fictional)  
-**Classification:** Incident  
-**Priority:** Medium  
-**ITIL Practice:** Incident Management  
-**Status:** In Progress
+## The ticket
 
-## Business Scenario
+A fictional Sales employee reported that they couldn't reach a business website. I worked through the basic connectivity checks on my own Windows 11 laptop. The employee's machine doesn't exist, so these results show how my laptop behaved, not theirs.
 
-A fictional Sales employee reports being unable to access a business website. A Level 1 IT support investigation is initiated to evaluate network connectivity and DNS resolution.
+## What I ran
 
-## Tools Used
+**`ipconfig /all`** — checked the Wi-Fi adapter (Intel Wi-Fi 6E AX211):
 
-- Windows Command Prompt
-- `ipconfig /all`
-- `ping`
-- `nslookup`
-- `tracert` 
-- Jira Service Management
+| Setting | Value |
+|---|---|
+| IPv4 address | 192.168.40.36 |
+| Subnet mask | 255.255.255.0 |
+| Default gateway | 192.168.40.1 |
+| DHCP server | 192.168.40.1 |
+| DNS server | 192.168.40.1 |
 
-## Investigation and Findings
+The address came from DHCP, and the gateway, DHCP server, and DNS server were all the same local router (192.168.40.1).
 
-| Diagnostic Test | Result | Interpretation |
-|---|---|---|
-| IPv4 configuration | 192.168.40.3/24 | Private IPv4 address configured |
-| Default gateway | 192.168.40.1 | Gateway configured |
-| DNS server | 192.168.40.1 | DNS server configured |
-| External IP ping | 4/4 replies, 0% packet loss | Successful ICMP connectivity |
-| Average latency | 48 ms | External endpoint responded |
-| DNS lookup | microsoft.com resolved successfully | DNS resolution functioning for tested hostname |
+**`ping 1.1.1.1`** — 4 sent, 4 received, 0% loss. Round-trip times were 34–84 ms, averaging 48 ms. That confirmed basic internet connectivity by IP, without involving DNS.
 
-## Technical Assessment
+**`nslookup microsoft.com`** — the router (192.168.40.1) answered and returned `150.171.110.211` plus an IPv6 address. So DNS resolution was working.
 
-The local Windows workstation successfully communicated with an external IP address and resolved a public hostname.
+**`tracert microsoft.com`** — reached `150.171.110.211` at hop 16 with "Trace complete." The final hop answered in 53, 44, and 41 ms. Hops 6 and 11–15 timed out. I didn't treat that as a fault, because the trace still finished and a lot of routers just don't reply to traceroute probes.
 
-The diagnostic results did not reveal an external IP connectivity or DNS resolution failure on the tested workstation.
+## Result
 
-Because the affected employee is fictional and their workstation was not tested, the original incident remains unverified.
+Nothing failed. IP connectivity, DNS, and routing to an external site all worked from my laptop. That rules out a general internet or DNS outage on this kind of setup, but it doesn't explain the user's problem. With a real user, my next questions would be which site they were trying to reach, what error they saw, and whether other sites worked.
 
-## Traceroute Analysis
+The ticket stays in **Work in progress** because there's no real user's machine to test or confirm a fix on.
 
-**Command:** `tracert microsoft.com`
+## Screenshots
 
-The trace successfully reached Microsoft's IP address (`150.171.110.211`) at hop 16.
+`ipconfig /all`, `ping`, and `nslookup` output:
 
-The final destination responded in 53 ms, 44 ms, and 41 ms.
+![Network diagnostics output](../evidence/09-nsit3-network-diagnostics.png)
 
-Several intermediate routers did not respond to traceroute probes. This does not necessarily indicate a network failure because routers may filter or deprioritize ICMP responses.
+`tracert` to microsoft.com:
 
-**Conclusion:** The workstation demonstrated successful route tracing to the destination, supporting the earlier connectivity and DNS test results.
+![Traceroute to microsoft.com](../evidence/10-nsit3-traceroute.png)
 
-### Traceroute Evidence
-
-![Traceroute to Microsoft](../evidence/10-nsit3-traceroute.png)
-
-## Outcome
-
-**Lab diagnostic exercise:** Completed.
-
-**Incident resolution:** Not confirmed.
-
-**Root cause:** Not established for the fictional reported issue.
-
-## Evidence
-
-![Windows network and DNS diagnostic results](../evidence/09-nsit3-network-diagnostics.png)
-
-## Skills Demonstrated
-
-- Windows network configuration analysis
-- IPv4 addressing and default gateway identification
-- ICMP connectivity testing
-- DNS troubleshooting
-- Incident documentation
-- ITIL-aligned service desk investigation
-
----
-
-*This project uses a fictional service desk scenario and actual diagnostic testing on a personal Windows workstation.*
+Related KB article: [KB-002 — Network and DNS Troubleshooting](../knowledge-base/KB-002-network-troubleshooting.md)

@@ -2,7 +2,7 @@
 
 ## What I was doing
 
-This is me getting solid on basic Windows and Linux administration before going deeper into SOC tools like Wazuh, which needs both.
+I wanted to get solid on basic Windows and Linux administration before going deeper into SOC tools like Wazuh, which needs both.
 
 ## Windows side
 
@@ -26,13 +26,14 @@ Worked through it in parts:
 - **Package management with `apt`** — installed `tree` just to watch a real package go through update → install → verify → use
 - **Logs** — the part that connected back to everything else I've done
 
-## The log thing that surprised me
+## Logs on the Linux side
 
-The plan was to check `/var/log/auth.log` and `/var/log/syslog`, the same way I'd checked Windows Event Viewer for Event ID 4625 earlier.
+Most guides point you to `/var/log/auth.log` and `/var/log/syslog`, the Linux equivalent of checking Event Viewer for Event ID 4625. On my Ubuntu 26.04 VM I used `journalctl` instead, which reads the systemd journal directly:
 
-Observation: Both /var/log/auth.log and /var/log/syslog existed on my Ubuntu system and contained real log entries. I used auth.log to review authentication-related activity and syslog to examine general system activity and search for errors.
+- `sudo journalctl -n 20` — the latest 20 entries system-wide
+- `sudo journalctl -u ssh -n 20` — the latest 20 entries for just the SSH service, which showed me exactly what was logged when I stopped and restarted SSH earlier in the session
 
-Either way, I used `journalctl` — `sudo journalctl -n 20` for general activity, and `sudo journalctl -u ssh -n 20` to see exactly what happened when I stopped and restarted SSH earlier in the session. Same idea as Event Viewer, just a different tool and a different format.
+Same idea as Event Viewer, just a different tool and a different format.
 
 ## The connection that mattered more than any single command
 
@@ -40,4 +41,4 @@ Windows and Linux expose security-relevant activity in completely different ways
 
 ## What's next
 
-Push this and the cheat sheet to GitHub, then keep moving through the roadmap — Wazuh will put a real attacker on this exact Ubuntu box, which is when this VM starts producing something actually worth investigating instead of just my own routine commands.
+The plan is to set up Wazuh and point it at this same Ubuntu VM. That's when the logs will show something worth investigating, instead of just my own routine commands.

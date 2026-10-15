@@ -1,8 +1,6 @@
 # KB-003 — Windows Printer and Print Spooler Troubleshooting
 
-## Purpose
-
-Provide Level 1 IT support steps for investigating Windows printing failures, stuck jobs, and Print Spooler service issues.
+First-line checks for Windows printing problems: stuck jobs, an offline printer, or a Print Spooler service that keeps stopping.
 
 ## Common Symptoms
 
@@ -61,26 +59,10 @@ After an authorized corrective action, print a test page and confirm the issue i
 
 Document the result before closing the incident.
 
-## Lab Findings — NSIT-6
-
-| Check | Observation |
-|---|---|
-| Print Spooler | Running |
-| Startup type | Automatic |
-| Print queue | No print jobs |
-| Stuck jobs | None visible |
-| Root cause | Not established |
-
-The local diagnostic exercise did not reproduce the fictional shared-printer problem.
-
 ## Escalation
 
-Escalate recurring incidents, hardware failures, network printer connectivity issues, and driver problems requiring elevated permissions.
+Escalate recurring incidents, hardware failures, network printer connectivity problems, and driver issues that need elevated permissions.
 
-## Related Lab
+## Example: NSIT-6
 
-[NSIT-6 — Printer Investigation](../tickets/NSIT-6-printer-investigation.md)
-
----
-
-*Prepared for a simulated IT support environment.*
+For [NSIT-6](../tickets/NSIT-6-printer-investigation.md), I ran steps 2 and 3 on my laptop. Print Spooler was running with startup type Automatic, and the print queue showed no jobs. That ruled out the spooler and a stuck queue on that machine, but it didn't reproduce the shared-printer problem. Steps 4 and 5 would have needed the actual printer.
