@@ -41,6 +41,22 @@ The diagnostic results did not reveal an external IP connectivity or DNS resolut
 
 Because the affected employee is fictional and their workstation was not tested, the original incident remains unverified.
 
+## Traceroute Analysis
+
+**Command:** `tracert microsoft.com`
+
+The trace successfully reached Microsoft's IP address (`150.171.110.211`) at hop 16.
+
+The final destination responded in 53 ms, 44 ms, and 41 ms.
+
+Several intermediate routers did not respond to traceroute probes. This does not necessarily indicate a network failure because routers may filter or deprioritize ICMP responses.
+
+**Conclusion:** The workstation demonstrated successful route tracing to the destination, supporting the earlier connectivity and DNS test results.
+
+### Traceroute Evidence
+
+![Traceroute to Microsoft](../evidence/10-nsit3-traceroute.png)
+
 ## Outcome
 
 **Lab diagnostic exercise:** Completed.
