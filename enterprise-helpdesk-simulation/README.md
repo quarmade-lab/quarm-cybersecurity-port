@@ -60,7 +60,7 @@ Planned activities:
 - Review ticket queues and workflows.
 - Establish sample prioritization and SLA targets.
 
-Evidence: `evidence/01-jira-service-desk-created.png`
+Evidence: (../evidence/01-jira-service-desk-created.png)
 
 ### Phase 2 — Incident and Request Simulation
 
