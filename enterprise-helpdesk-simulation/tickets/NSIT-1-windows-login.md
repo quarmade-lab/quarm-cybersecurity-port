@@ -79,7 +79,7 @@ The exercise demonstrated:
 
 - `01-jira-service-desk-created.png`
 - `02-first-incident-created.png`
-- `03-ad-user-account-check.png` — if captured
+- `03-ad-user-account-check.png`
 - `04-ad-account-status.png`
 - `05-authentication-event-check.png`
 - `06-failed-login-analysis.png`
