@@ -26,8 +26,8 @@ Four common help desk tasks on my domain controller: a password reset, disabling
 ### [Windows and Linux Fundamentals](windows-linux-fundamentals/)
 Notes from practicing core admin tasks on Windows and on a command-line-only Ubuntu Server VM: services, users, permissions, packages, and logs, plus a quick-reference cheat sheet.
 
-### [Vulnerability Scanning Lab](vulnerability-scanning-lab/) — planned
-Not started yet. The plan is to scan an intentionally vulnerable target in an isolated lab and write up the findings.
+<!--### [Vulnerability Scanning Lab](vulnerability-scanning-lab/) — planned
+Not started yet. The plan is to scan an intentionally vulnerable target in an isolated lab and write up the findings.-->
 
 ## Contact
 
