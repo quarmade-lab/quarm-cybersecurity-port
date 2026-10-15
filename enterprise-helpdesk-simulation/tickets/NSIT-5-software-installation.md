@@ -39,27 +39,25 @@ Searched for Adobe applications.
 ## Functional Verification
 
 **Procedure:**
-1. Launch Adobe Acrobat.
-2. Open a sample PDF document.
-3. Verify that the document renders correctly.
+1. Launched Adobe Acrobat.
+2. Opened a sample PDF document.
+3. Verified that the document displayed successfully.
 
-**Result:** [Record actual test outcome.]
+**Result:** Passed — Adobe Acrobat opened and displayed a PDF document without an observed error.
 
 ## Technical Assessment
 
-Adobe Acrobat was already installed on the tested workstation.
+Adobe Acrobat (64-bit), version 26.002.21931, was already installed on the tested Windows workstation.
 
-This demonstrates the importance of verifying existing software before attempting installations, avoiding unnecessary changes and duplicate software.
+The application launched successfully and displayed a PDF document. No new installation was required.
 
 ## Outcome
 
-**Software inventory check:** Completed.
-
-**Functional verification:** [Record actual result.]
-
-**New installation performed:** No.
-
-**Production request fulfilled:** Not verified; the employee and corporate environment are fictional.
+**Software inventory check:** Completed.  
+**Functional verification:** Passed.  
+**New installation performed:** No.  
+**Lab exercise:** Completed.  
+**Production request fulfilled:** Not verified; the fictional employee's workstation was not tested.
 
 ## Evidence
 
@@ -69,7 +67,7 @@ This demonstrates the importance of verifying existing software before attemptin
 
 ### Functional Test
 
-![Adobe Acrobat PDF test](../evidence/14-nsit5-pdf-functional-test.png)
+![Adobe Acrobat displaying a PDF](../evidence/14-nsit5-pdf-functional-test.png)
 
 ## Skills Demonstrated
 
