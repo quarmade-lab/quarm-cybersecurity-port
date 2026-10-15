@@ -1,64 +1,61 @@
 # INC-001 — Failed Logon Attempts (Event ID 4625)
 
-**Environment:** Active Directory Help Desk Lab — domain controller `DC01.quarm.local`
-**Log source:** Windows Security Event Log, Event ID 4625
-**Date of activity:** 6/25/2026
-**Investigator:** Quarm Adeniran
-
-> Quick note: for the 6:48:12 PM event, I'm assuming the account was `testuser` since it matches the others (same domain, same error code, right next to them in time) — I didn't reopen that specific event to double-check the account name field, so worth confirming if you want to be fully sure.
-
----
+- **Environment:** Active Directory lab, domain controller `DC01.quarm.local`
+- **Log source:** Windows Security log, Event ID 4625
+- **Activity date:** 6/25/2026 (lockout policy follow-up on 9/16/2026)
+- **Investigator:** Quarm Adeniran
 
 ## Summary
 
-I found 6 failed logon events (Event ID 4625) in the Security log from 6/25/2026. Five of them happened close together, within about 25 minutes, and came from tests I ran on purpose — using the `runas` command with a wrong password a few times, and once with a username that doesn't exist. But one event, from almost two hours earlier, looked different: it was tied to a different computer account and domain (`WORKGROUP` instead of `QUARM`). I looked into why, and it turned out to just be an old log entry from before this VM was renamed and promoted to be the domain controller — not a separate machine, just leftover history from earlier in the build. I also noticed that none of my failed attempts actually locked the account, even after several wrong passwords in a row on the same user.
+I found six failed logon events (Event ID 4625) in the Security log for 6/25/2026. Five of them happened within about 25 minutes of each other, and I'd caused them on purpose: wrong passwords for `testuser` through `runas`, plus one attempt with a username that doesn't exist. The sixth event, from almost two hours earlier, looked different, because it was logged under a different computer name in `WORKGROUP` instead of the `QUARM` domain. After looking into it, I found it was just an old entry from before this VM was renamed and promoted to a domain controller. It wasn't a separate machine.
 
-## Timeline
+The more important finding was that none of the wrong passwords locked the account. I followed up by setting a lockout policy and testing it.
 
-| Time (6/25/2026) | Account | What Happened | Status / Sub Status | Computer |
+## Timeline (6/25/2026)
+
+| Time | Account | What happened | Status / Sub-status | Computer |
 |---|---|---|---|---|
-| 5:25:57 PM | *not part of my testing — see note* | Bad password | 0xC000006D / 0xC000006A | WIN-BRQ06M4N1G8 (WORKGROUP — old hostname, pre-promotion) |
-| 6:48:12 PM | testuser (assumed) | Bad password | 0xC000006D / 0xC000006A | DC01.quarm.local (DC01$ / QUARM) |
+| 5:25:57 PM | Not part of my testing (see below) | Bad password | 0xC000006D / 0xC000006A | WIN-BRQ06M4N1G8 (old hostname, WORKGROUP) |
+| 6:48:12 PM | testuser (not confirmed) | Bad password | 0xC000006D / 0xC000006A | DC01.quarm.local |
 | 7:11:54 PM | testuser | Bad password | 0xC000006D / 0xC000006A | DC01.quarm.local |
 | 7:12:11 PM | testuser | Bad password | 0xC000006D / 0xC000006A | DC01.quarm.local |
 | 7:12:22 PM | testuser | Bad password | 0xC000006D / 0xC000006A | DC01.quarm.local |
-| 7:13:11 PM | notarealuser | Account doesn't exist | 0xC000006D / 0xC0000064 | DC01.quarm.local |
+| 7:13:11 PM | notarealuser | User doesn't exist | 0xC000006D / 0xC0000064 | DC01.quarm.local |
 
-One more thing I checked: the Logon Type on these events was **2**, which means Interactive (like typing credentials in directly) rather than 3 (Network). That fits, since I ran these tests locally with `runas` rather than trying to log in remotely.
+For the 6:48:12 PM event, I didn't capture the "Account For Which Logon Failed" field. I've listed it as `testuser` because it matches the others (same domain, same codes, same machine), but I haven't confirmed that.
 
-## What I Found
+## How I investigated
 
-- The two accounts I tested against: `testuser` and `notarealuser`
-- One event that looked odd at first — `WIN-BRQ06M4N1G8` in domain `WORKGROUP` — turned out to just be this VM's old identity from before it became the domain controller, not a separate host
-- 4 wrong-password attempts on `testuser` happened within about 25 seconds of each other, then one attempt on a username that doesn't exist right after
+1. Filtered the Security log for Event ID 4625, which returned six events.
+2. Opened each one and recorded the time, account, status and sub-status, and computer.
+3. Looked up the codes so I could tell the failures apart instead of assuming they were all the same. `0xC000006D` is the general "logon failed" status. The sub-status gives the reason: `0xC000006A` means the username was right but the password was wrong, and `0xC0000064` means the username doesn't exist.
+4. Checked the logon type. The events I looked at showed **Logon Type 2** (interactive, credentials typed on the machine itself) rather than Type 3 (network). That fits, since I ran `runas` locally.
+5. Followed up on the event that didn't fit. Its subject was `WIN-BRQ06M4N1G8$` in `WORKGROUP`, while the later events show `DC01$` in `QUARM`. That's this server's auto-generated name from before I renamed and promoted it.
 
-## Why It Matters
+## What I found
 
-None of these attempts actually got in, which is good, but I also never saw a lockout happen, even after 4 wrong passwords in a row on the same account. In a real environment, that's worth flagging — it means someone could keep guessing passwords without ever getting blocked.
+- The failures came from two accounts: `testuser` (wrong password) and `notarealuser` (doesn't exist).
+- Three wrong-password attempts on `testuser` happened within 28 seconds (7:11:54 to 7:12:22), with the nonexistent-user attempt less than a minute later.
+- The `WIN-BRQ06M4N1G8` event was the server's old identity, not another host.
+- **No lockout ever happened.** Repeated bad passwords on the same account went through with no limit. In a real environment, that means someone could keep guessing passwords indefinitely.
 
-## What I Did
+## Recommendations
 
-1. Filtered the Security log for Event ID 4625, which pulled up 6 matching events.
-2. Opened each one and wrote down the time, account name, status/sub-status code, and which computer it came from.
-3. Looked up what the status codes actually meant — `0xC000006A` = wrong password, `0xC0000064` = account doesn't exist — so I could tell the attempts apart instead of assuming they were all the same thing.
-4. Noticed one event didn't match the pattern of the rest and checked its details until I figured out why (the pre-promotion hostname, above).
+1. Set an account lockout policy so repeated bad passwords lock the account.
+2. Alert on several failed logons for the same account in a short window, so this kind of pattern doesn't depend on someone spotting it in Event Viewer.
 
-## What I'd Recommend
+## Follow-up: account lockout policy
 
-1. Set up an account lockout policy (e.g., lock the account after 5 bad password attempts within 15 minutes) — right now nothing stops someone from just guessing passwords over and over.
-2. It'd be worth setting up an alert for this kind of pattern (several failed logins on the same account in a short window) instead of having to notice it manually in Event Viewer, like I did here.
+I went back and implemented recommendation 1.
 
-Update — Recommendation #1 Implemented and Verified
+**Change:** I created a GPO called `Account-Lockout-Policy` with a lockout threshold of 5 invalid attempts and a 30-minute lockout duration.
 
-I went back and actually did this instead of just leaving it as a suggestion.
+**Problem:** The policy didn't apply, even though the GPO was linked and enabled. I ran `gpresult /h` to see which GPO was winning each setting. It showed that the Default Domain Policy also defined the lockout threshold, set to 0, and was taking priority over my GPO. Domain account policies normally belong in the Default Domain Policy anyway, so I moved the settings there instead of fighting the precedence order. Then I ran `gpupdate /force`.
 
-What I did: Created a GPO (Account-Lockout-Policy) and set the account lockout threshold to 5 invalid attempts, 30-minute lockout duration.
+**Test:** On 9/16/2026, I repeated the `runas` wrong-password test against `testuser`. After five bad passwords, `runas` returned a different error: **1909: The referenced account is currently locked out and may not be logged on to.** Event Viewer recorded **Event ID 4740** (account locked out) for `testuser` at 4:52:15 PM.
 
-What went wrong the first few tries, and how I fixed it: the policy didn't apply at first even though it looked correctly linked and enabled. Using gpresult /h to check exactly which GPO was winning each setting, I found that a separate built-in GPO (Default Domain Policy) was also defining the lockout threshold — set to 0 — and it was taking priority over mine because of GPO link order. I moved the setting into Default Domain Policy directly (the standard place for account policies) instead of fighting the precedence order, then ran gpupdate /force to push it out immediately.
+**Cleanup:** I unlocked the account in Active Directory Users and Computers (Account tab, **Unlock account**). A help desk tech would do the same thing after confirming the lockout was user error and not an attack.
 
-How I confirmed it actually worked: ran the same runas wrong-password test as before. After 5 attempts, runas returned a new error — 1909: The referenced account is currently locked out — instead of the usual bad-password error. Event Viewer confirmed it with a new event type I hadn't captured before: Event ID 4740 (Account Lockout), showing testuser as the locked account.
+## Evidence
 
-I then unlocked the account through Active Directory Users and Computers (Account tab → "Unlock account" checkbox) to restore access — the same step a help desk tech would take after confirming a lockout was legitimate user error rather than an attack.
-
-
-*Screenshots for this investigation are in `README.md` in this folder.*
+Screenshots for each step are in this folder's [README](README.md#screenshots).

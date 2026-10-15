@@ -1,46 +1,31 @@
 # NSIT-2 — New Employee Onboarding
 
-## Scenario
-A fictional Finance Assistant requires IT access and workstation preparation before their first working day.
+**Type:** Service request (Onboard new employees) · **Priority:** Medium · **Jira status:** Pending
 
-## Platform
-Jira Service Management Cloud
+## The request
 
-## ITIL Practice
-Service Request Management
+HR (simulated) sent in an onboarding request for "Sarah Johnson", a fictional Finance Assistant starting October 19, 2026. The request asked for:
 
-## Request Requirements
-- Corporate identity and user account
-- Approved Finance security-group membership
+- A user account
+- Membership in the approved Finance security group
 - Microsoft 365 access
-- Workstation preparation
-- Application installation
-- Access verification
+- A prepared workstation with the needed applications
+- Confirmation that everything worked before her first day
 
-## Fulfillment Workflow
-1. Register the onboarding request.
-2. Confirm employee details and business justification.
-3. Request manager authorization.
-4. Validate least-privilege access.
-5. Prepare provisioning checklist.
-6. Perform approved provisioning when available.
-7. Verify access and obtain requester acknowledgment.
-8. Close the request after acceptance criteria are satisfied.
+## What I did
 
-## Actions Completed
-- [ ] Request created in Jira
-- [ ] Request assigned
-- [ ] Initial assessment documented
-- [ ] Approval obtained
-- [ ] Account provisioned
-- [ ] Access verified
-- [ ] Request completed
+This ticket was about the intake and request-handling side of onboarding, not the technical setup. I:
 
-## Outcome
-Update this section with the actual completed actions and outstanding dependencies.
+- Logged the request in Jira under the **Onboard new employees** request type
+- Set the due date to the start date (Oct 19, 2026) and assigned it to myself
+- Noted the SLA targets Jira applied: 12 hours to first response, 48 hours to resolution
 
-## Evidence
-![New employee onboarding request](../evidence/08-nsit2-onboarding-request.png)
+I didn't create an account, add anyone to a group, or set up Microsoft 365 or a workstation. There was no manager approval either, since the requester and approver are both fictional. In a real onboarding I'd wait for that approval before touching any accounts, then verify access with the new hire before closing the request.
 
-## Lab Disclaimer
-This is a simulated onboarding request. The fictional employee's account and permissions are not considered provisioned unless the relevant technical steps are actually performed and verified.
+## Result
+
+The request is logged and tracked but not fulfilled. It's in **Pending** status in Jira.
+
+## Screenshot
+
+![NSIT-2 onboarding request in Jira](../evidence/08-nsit2-onboarding-request.png)

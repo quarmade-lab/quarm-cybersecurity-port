@@ -1,6 +1,6 @@
 # Windows + Linux Fundamentals Cheat Sheet
 
-Quick reference from working through — diagnostics, services, users, and logs on Windows and Ubuntu.
+Quick reference I put together while practicing diagnostics, services, users, and logs on Windows and Ubuntu.
 
 ---
 
@@ -16,7 +16,7 @@ Quick reference from working through — diagnostics, services, users, and logs 
 ### User Management
 - GUI: `compmgmt.msc` → System Tools → Local Users and Groups
 - PowerShell:
-  ```
+  ```powershell
   Get-LocalUser
   New-LocalUser -Name "labtest" -Password (Read-Host -AsSecureString)
   ```
@@ -75,8 +75,8 @@ sudo apt install -y <pkg>  # install a package
 ```
 
 ### Logs
-- **Older Ubuntu / traditional setups:** `/var/log/auth.log` (authentication events), `/var/log/syslog` (general system activity)
-- **Newer Ubuntu (26.04+ in my case):** these plain-text files may not exist at all — logging relies on `journald` instead. This isn't broken, it's just how modern systemd-based distros work.
+- **Traditional log files:** `/var/log/auth.log` (authentication events), `/var/log/syslog` (general system activity)
+- **systemd journal (what I used on Ubuntu 26.04):**
   ```bash
   sudo journalctl -n 20          # latest 20 entries, system-wide
   sudo journalctl -u ssh -n 20   # latest 20 entries for one specific service

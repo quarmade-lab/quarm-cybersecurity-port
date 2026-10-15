@@ -1,109 +1,83 @@
-# NSIT-1 — Windows Domain Login Investigation
+# NSIT-1 — Employee Can't Sign In to Windows
 
-## Incident Overview
+**Type:** Incident · **Priority:** Medium (single user, medium urgency) · **Jira status:** Pending
 
-**Organization:** Northstar Solutions (fictional)  
-**Environment:** Windows Server 2022 / Active Directory  
-**Domain:** quarm.local  
-**Ticketing platform:** Jira Service Management  
-**Ticket reference:** NSIT-1
-**Classification:** Incident  
-**Impact:** Single user  
-**Urgency:** Medium  
-**Jira Status:** Pending — Awaiting user sign-in verification
-**Lab Exercise Status:** Password-reset procedure completed
-**Root Cause:** Not conclusively established
+## The ticket
 
-## Business Scenario
+A fictional Finance employee, "John Smith", reported repeated failures signing in to his Windows workstation with his domain credentials. He wasn't sure if his password had expired or his account was locked.
 
-A fictional Finance employee reported being unable to sign in to their Windows workstation using domain credentials.
+I used the `testuser` account ("Test User") on my lab domain controller, `DC01.quarm.local`, to stand in for his account.
 
-As the simulated Level 1 IT Support Technician, I investigated the account's status, reviewed available authentication logs, and performed an administrative password-reset exercise.
+## What I did
 
-## Investigation
+**1. Found the account.** In Active Directory Users and Computers, I located Test User in the `Test Users` OU and checked its Account tab. "Password never expires" is turned on for this account.
 
-### 1. Account Identification
+**2. Checked account status in PowerShell.**
 
-Opened Active Directory Users and Computers and located the Test User account under the Test Users organizational unit.
-
-### 2. Account Status Verification
-
-Used the Active Directory PowerShell module to check the account.
-
-**Verified results:**
+```powershell
+Get-ADUser -Filter 'Name -eq "Test User"' -Properties Enabled,LockedOut,PasswordExpired,PasswordLastSet |
+  Select-Object Name,SamAccountName,Enabled,LockedOut,PasswordExpired,PasswordLastSet
+```
 
 | Property | Result |
 |---|---|
 | Enabled | True |
 | LockedOut | False |
 | PasswordExpired | False |
-| PasswordLastSet | June 25, 2026 |
+| PasswordLastSet | 6/25/2026 7:07:12 PM |
 
-The account was active, not locked, and its password was not expired.
+So the account was enabled, not locked, and the password wasn't expired. That ruled out the two things the user was worried about.
 
-### 3. Authentication Log Investigation
+**3. Looked for failed logons.** Event Viewer showed 18 Event ID 4625 entries in the Security log. I pulled the five most recent with:
 
-Queried Windows Security Event ID 4625 on the domain controller.
+```powershell
+Get-WinEvent -FilterHashtable @{LogName='Security'; ID=4625} -MaxEvents 5 |
+  Select-Object TimeCreated,Id,MachineName | Format-Table -AutoSize
+```
 
-Five historical failed-logon events were identified on DC01.quarm.local, dated September 16, 2026.
+What the evidence confirms:
 
-The events were reviewed using Windows Event Viewer.
+- All five events were logged on DC01 on 9/16/2026, between 4:51:51 and 4:52:15 PM.
+- I opened one of them (4:52:10 PM) in Event Viewer. It was for `testuser`, with status `0xC000006D` (unknown username or bad password). I didn't open the other four, so I haven't confirmed their account names.
+- During my lockout-policy test in the [Windows Failed Login Investigation](../../windows-log-investigation/INC-001-failed-logon-investigation.md), Event ID 4740 recorded `testuser` being locked out at 4:52:15 PM on the same day.
 
-These historical events were not conclusively linked to the fictional employee's reported sign-in problem.
+What I'm inferring: the matching date, account, and end time point to these failures coming from my own `runas` lockout test, not from anything related to this ticket. I haven't matched each event to a specific attempt, though, so this is my best explanation rather than a confirmed one.
 
-### 4. Corrective Action
+**4. Reset the password.** I right-clicked the account in ADUC, chose **Reset Password**, and got the confirmation "The password for Test User has been changed."
 
-Performed an administrative password reset for the test account using Active Directory Users and Computers.
+## Result
 
-The password-reset operation completed successfully.
+The password reset worked, but I can't call the incident resolved:
 
-### 5. Verification and Limitations
+- I didn't test an interactive sign-in from a domain-joined workstation after the reset.
+- The account showed no problems that would explain the reported failure, so the root cause is still unknown.
 
-The administrative password-reset operation was confirmed.
+That's why the ticket is at **Pending** rather than Resolved. The next step would be to have the user try signing in with the new temporary password and note the exact error if it still fails.
 
-A successful interactive sign-in from a domain-joined Windows workstation was not tested.
+## Screenshots
 
-The root cause of the simulated sign-in problem was not conclusively established.
+Incident logged in Jira:
 
-## ITIL Incident Management
+![NSIT-1 in Jira](../evidence/02-first-incident-created.png)
 
-The exercise demonstrated:
+Test User's Account tab in ADUC:
 
-- Incident registration and prioritization
-- Initial investigation and diagnosis
-- Account-status verification
-- Authentication-log review
-- Administrative account recovery
-- Internal ticket documentation
-- Recording verification limitations
+![Test User account properties](../evidence/03-ad-user-account-check.png)
 
-## Evidence
+`Get-ADUser` output:
 
-### 01 — Jira Service Desk Setup
-![Jira Service Desk Setup](../evidence/01-jira-service-desk-created.png)
+![Account status in PowerShell](../evidence/04-ad-account-status.png)
 
-### 02 — Incident Created
-![Incident Created](../evidence/02-first-incident-created.png)
+The five most recent 4625 events from `Get-WinEvent`:
 
-### 03 — Active Directory User Properties
-![AD User Properties](../evidence/03-ad-user-account-check.png)
+![Get-WinEvent output](../evidence/05-authentication-event-check.png)
 
-### 04 — Account Status Verification
-![AD Account Status](../evidence/04-ad-account-status.png)
+One of those events open in Event Viewer (18 total in the filtered log):
 
-### 05 — Authentication Event Check
-![Event ID 4625](../evidence/05-authentication-event-check.png)
+![Failed logon event in Event Viewer](../evidence/06-failed-login-analysis.png)
 
-### 06 — Failed Login Analysis
-![Failed Login Analysis](../evidence/06-failed-login-analysis.png)
+Password reset confirmation:
 
-### 07 — Password Reset Confirmation
-![Password Reset Confirmation](../evidence/07-ad-password-reset-confirmation.png)
+![Password reset confirmation](../evidence/07-ad-password-reset-confirmation.png)
 
-## Conclusion
-
-This simulated incident demonstrated a structured Level 1 IT support investigation using Jira Service Management, Active Directory, PowerShell, and Windows Event Viewer.
-
-The account recovery procedure was completed, while workstation authentication verification and definitive root-cause identification remained outside the completed scope.
-
-**Disclaimer:** This is a training simulation, not a production support incident.
+Related KB article: [KB-001 — Active Directory Password Reset](../knowledge-base/KB-001-password-reset.md)

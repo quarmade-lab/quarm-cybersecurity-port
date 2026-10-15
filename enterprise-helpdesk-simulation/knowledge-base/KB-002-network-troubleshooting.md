@@ -1,17 +1,6 @@
 # KB-002 — Windows Network and DNS Troubleshooting
 
-## Purpose
-
-Provide a repeatable troubleshooting process for Windows workstations experiencing internet connectivity or DNS resolution issues.
-
-## Tools
-
-- Windows Command Prompt
-- ipconfig
-- ping
-- nslookup
-- tracert
-- Jira Service Management
+A step-by-step check for a Windows PC that can't reach the internet or a specific website. Everything here runs from Command Prompt.
 
 ## Procedure
 
@@ -45,7 +34,7 @@ ping 1.1.1.1
 
 Review packet loss and response times.
 
-Successful replies demonstrate ICMP connectivity to the tested destination. Failed replies do not always establish a network outage because ICMP may be blocked.
+Replies mean the PC can reach the internet by IP address. No replies doesn't always mean an outage, because some networks block ICMP.
 
 ### Step 4 — Test DNS Resolution
 
@@ -73,27 +62,20 @@ Intermediate timeouts do not necessarily indicate a routing failure.
 
 ### Step 6 — Document and Escalate
 
-Record commands, timestamps, actual outputs, and affected services.
+Record the commands, their output, and when you ran them in the ticket.
 
-Escalate when the issue requires router, DNS server, firewall, ISP, or infrastructure changes outside the technician's authority.
+Escalate if the fix needs changes to a router, DNS server, firewall, or the ISP connection.
 
-## Lab Findings — NSIT-3
+## Example: NSIT-3
 
-| Test | Observed Result |
+When I ran these steps for [NSIT-3](../tickets/NSIT-3-network-troubleshooting.md), everything passed:
+
+| Test | Result |
 |---|---|
-| IPv4 address | 192.168.40.3 |
-| Default gateway | 192.168.40.1 |
-| DNS server | 192.168.40.1 |
-| Ping 1.1.1.1 | 0% packet loss |
-| DNS lookup | microsoft.com resolved successfully |
-| Traceroute | Destination reached at hop 16 |
+| IPv4 address | 192.168.40.36 |
+| Default gateway / DNS server | 192.168.40.1 |
+| `ping 1.1.1.1` | 4/4 replies, 0% loss |
+| `nslookup microsoft.com` | Resolved to 150.171.110.211 |
+| `tracert microsoft.com` | Destination reached at hop 16 |
 
-These results demonstrate successful tests on the lab workstation, not resolution of a fictional employee's incident.
-
-## Related Lab
-
-[NSIT-3 — Network Troubleshooting](../tickets/NSIT-3-network-troubleshooting.md)
-
----
-
-*Prepared for a simulated IT support environment.*
+A clean result like this rules out a general connectivity or DNS failure on the tested machine. It doesn't prove the user's specific problem is fixed.

@@ -1,192 +1,49 @@
-# Enterprise IT Help Desk & ITIL Service Management Simulation
+# Enterprise Help Desk Simulation
 
-## Project Overview
+I set up an IT service desk in Jira Service Management Cloud for Northstar Solutions, a fictional 50-person company, and worked through six tickets as a Tier 1 technician. The company, employees, and their reported problems are made up. The troubleshooting was real: I ran the checks on my Active Directory lab server or on my own Windows 11 laptop, and every result below comes from those tests.
 
-This project simulates a Level 1 IT Service Desk supporting Northstar Solutions, a fictional organization with 50 employees.
+None of the tickets are closed. In each case I could check the systems I had access to, but I couldn't confirm with the "employee" that their problem was gone, so they're still sitting at Pending or Work in progress in Jira. I'd rather leave them open than mark them resolved without proof.
 
-The objective is to demonstrate practical IT support skills using Jira Service Management, including ticket intake, incident prioritization, troubleshooting, service requests, escalation, knowledge-base documentation, and ITIL-aligned service management.
+## Setup
 
-**Environment:** Simulated enterprise IT support environment  
-**Platform:** Jira Service Management Cloud  
-**Role:** Simulated Tier 1 IT Support Technician  
-**Project Key:** NSIT  
-**Status:** Completed
+- Created the **Northstar IT Service Desk** project (key `NSIT`) from Jira's IT Service Management template
+- Used the built-in request types (Get IT help, Report a system problem, Onboard new employees)
+- Used the default SLAs. For example, NSIT-1 had a 6-hour first-response target and a 36-hour resolution target
+- Assigned every ticket to myself
 
-## Business Scenario
+![Northstar IT Service Desk summary page](evidence/01-jira-service-desk-created.png)
 
-Northstar Solutions requires a centralized IT support service to handle employee technical issues and requests.
+## Tickets
 
-Common support scenarios include:
-
-- Windows login and password issues
-- Network and DNS connectivity problems
-- Printer troubleshooting
-- Microsoft 365 authentication issues
-- Software installation requests
-- New employee onboarding
-- Shared-folder access issues
-- Workstation performance problems
-
-## Project Objectives
-
-1. Configure a functional IT service desk.
-2. Organize incoming requests by category and priority.
-3. Simulate realistic support tickets.
-4. Investigate and document technical issues.
-5. Apply ITIL incident and service request practices.
-6. Document resolutions and escalation decisions.
-7. Create reusable knowledge-base articles.
-8. Capture evidence of the completed workflows.
-
-## Tools and Technologies
-
-- Jira Service Management
-- Windows troubleshooting utilities
-- Windows Event Viewer
-- Active Directory lab (where applicable)
-- Command Prompt and PowerShell
-- GitHub
-- ITIL 4 service management concepts
-
-## Implementation Log
-
-### Phase 1 — Service Desk Setup
-
-**Status:** In progress
-
-Planned activities:
-- Create the Jira service project.
-- Configure request types and categories.
-- Review ticket queues and workflows.
-- Establish sample prioritization and SLA targets.
-
-#### Jira Service Desk — Initial Setup
-
-Created the Northstar IT Service Desk using Jira Service Management's IT Service Management template.
-
-![Northstar IT Service Desk Dashboard](evidence/01-jira-service-desk-created.png)
-
-### Phase 2 — Incident and Request Simulation
-
-**Status:** In progress
-
-#### NSIT-1 — Windows Domain Login Investigation
-
-Created and investigated a simulated Windows authentication incident using Jira Service Management and an existing Active Directory lab.
-
-**Activities performed:**
-- Registered and prioritized an incident in Jira.
-- Investigated an Active Directory test account.
-- Verified account status using PowerShell.
-- Reviewed Windows Security Event ID 4625.
-- Inspected failed-login records in Event Viewer.
-- Performed an administrative password-reset exercise.
-- Documented investigation findings and verification limitations.
-
-**Verified findings:**
-- Account enabled: True
-- Account locked: False
-- Password expired: False
-- Five historical failed-logon events identified on DC01.
-
-**Outcome:** The password-reset exercise was completed. Successful workstation sign-in was not independently verified, and the root cause was not conclusively established.
-
-**Incident report:** [NSIT-1 — Windows Login Investigation](tickets/NSIT-1-windows-login.md)
-
-**Supporting evidence:** [View screenshots](evidence/)
-
-### Phase 3 — Troubleshooting and Resolution
-
-Not started.
-
-### Phase 4 — ITIL Documentation and Knowledge Base
-
-Not started.
-
-## Results
-
-### Completed Work
-
-- Deployed a simulated IT Service Desk using Jira Service Management.
-- Created and documented the first incident, NSIT-1.
-- Applied incident classification and prioritization.
-- Used Active Directory and PowerShell to investigate account status.
-- Reviewed Windows authentication logs.
-- Performed an administrative password-reset exercise.
-- Captured and organized supporting evidence in GitHub.
-
-### Skills Demonstrated
-
-- IT Service Management
-- ITIL-aligned incident management
-- Jira Service Management
-- Active Directory administration
-- Windows Server troubleshooting
-- PowerShell
-- Windows Event Viewer
-- Technical documentation
-
-### Current Limitations
-
-The project uses a simulated business environment. The first incident demonstrated account investigation and password-reset procedures, but did not verify successful workstation sign-in or conclusively establish the original failure cause.
-
-Additional service request, escalation, and knowledge-base workflows are planned.
-
-## IT Support Ticket Portfolio
-
-This project demonstrates hands-on familiarity with Jira Service Management, ITIL-aligned service desk workflows, Windows troubleshooting, and technical documentation.
-
-The organization and employee scenarios are fictional. Technical findings are supported by controlled Windows lab exercises.
-
-### Jira Service Desk Cases
-
-| Ticket | Scenario | ITIL Practice | Report |
+| Ticket | Issue | What I actually did | Jira status |
 |---|---|---|---|
-| NSIT-1 | Windows login investigation | Incident Management | [View](tickets/NSIT-1-windows-login.md) |
-| NSIT-2 | New employee onboarding | Service Request Management | [View](tickets/NSIT-2-employee-onboarding.md) |
-| NSIT-3 | Network and DNS troubleshooting | Incident Management | [View](tickets/NSIT-3-network-troubleshooting.md) |
-| NSIT-4 | Windows performance investigation | Incident Management | [View](tickets/NSIT-4-windows-performance.md) |
-| NSIT-5 | Software availability and verification | Service Request Management | [View](tickets/NSIT-5-software-installation.md) |
-| NSIT-6 | Printer troubleshooting | Incident / Problem Management | [View](tickets/NSIT-6-printer-investigation.md) |
+| [NSIT-1](tickets/NSIT-1-windows-login.md) | Employee can't sign in to Windows | Checked the AD account with PowerShell, reviewed Event ID 4625 logs, reset the password | Pending |
+| [NSIT-2](tickets/NSIT-2-employee-onboarding.md) | New hire onboarding | Logged and scoped the request; no account was created | Pending |
+| [NSIT-3](tickets/NSIT-3-network-troubleshooting.md) | Can't reach a website | Ran `ipconfig /all`, `ping`, `nslookup`, and `tracert`; all succeeded | Work in progress |
+| [NSIT-4](tickets/NSIT-4-windows-performance.md) | Slow workstation | Reviewed Task Manager; CPU and disk low, memory at 78% | Work in progress |
+| [NSIT-5](tickets/NSIT-5-software-installation.md) | Needs a PDF reader | Found Adobe Acrobat already installed and opened a PDF; nothing installed | In Progress |
+| [NSIT-6](tickets/NSIT-6-printer-investigation.md) | Recurring printer problems | Print Spooler running (Automatic); print queue empty | Work in progress |
 
-### Knowledge Base
+## Knowledge base
+
+Each article is based on one of the tickets:
 
 - [KB-001 — Active Directory Password Reset](knowledge-base/KB-001-password-reset.md)
 - [KB-002 — Network and DNS Troubleshooting](knowledge-base/KB-002-network-troubleshooting.md)
-- [KB-003 — Windows Printer Troubleshooting](knowledge-base/KB-003-printer-troubleshooting.md)
+- [KB-003 — Printer and Print Spooler Troubleshooting](knowledge-base/KB-003-printer-troubleshooting.md)
 
-### Jira Service Management Evidence
+## Tools
 
-**Service Desk Queue**
+Jira Service Management, Active Directory Users and Computers, PowerShell (`Get-ADUser`, `Get-WinEvent`), Event Viewer, Command Prompt networking tools, Task Manager, `services.msc`, Windows Settings.
+
+## Screenshots
+
+**Service desk queue** — all six tickets and their current status:
 
 ![Jira service desk queue](evidence/17-jira-service-desk-queue.png)
 
-**SLA Tracking**
+**SLA tracking on NSIT-1:**
 
 ![Jira SLA tracking](evidence/18-jira-sla-tracking.png)
 
-### Skills Demonstrated
-
-- Jira Service Management ticket creation, assignment, and tracking
-- ITIL Incident Management
-- ITIL Service Request Management
-- Problem Management concepts
-- Ticket prioritization and escalation
-- SLA monitoring
-- Active Directory account recovery procedures
-- Windows desktop troubleshooting
-- Network and DNS diagnostics
-- Software inventory and functional testing
-- Print Spooler and printer queue investigation
-- Knowledge-base documentation
-- GitHub technical reporting
-
-### Scope and Limitations
-
-This is an independent IT support simulation, not production service desk employment.
-
-Technical exercises were performed in controlled lab environments. Fictional employee incidents remain open or pending where successful user-side resolution could not be verified.
-
-## Disclaimer
-
-This is an independent training project using fictional employees, simulated tickets, and controlled lab environments. It does not represent employment at Northstar Solutions or production IT support experience.
+Each ticket report has its own screenshots, and all of them are in the [evidence folder](evidence/).

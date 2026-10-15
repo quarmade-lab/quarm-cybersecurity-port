@@ -1,16 +1,6 @@
 # KB-001 — Windows Active Directory Password Reset
 
-## Purpose
-
-Provide a standardized Level 1 IT support procedure for investigating Windows domain login failures and performing authorized password resets.
-
-## Applicable Systems
-
-- Windows Server
-- Active Directory Domain Services (AD DS)
-- Active Directory Users and Computers (ADUC)
-- Windows Event Viewer
-- Jira Service Management
+How to check why a user can't sign in to a domain account, and how to reset the password safely. Uses Active Directory Users and Computers (ADUC) and Event Viewer on the domain controller.
 
 ## Common Symptoms
 
@@ -45,6 +35,13 @@ Verify whether the account is:
 - Subject to password expiration
 - Affected by account restrictions
 
+PowerShell gives a quick summary:
+
+```powershell
+Get-ADUser -Identity <username> -Properties Enabled,LockedOut,PasswordExpired,PasswordLastSet |
+  Select-Object Name,Enabled,LockedOut,PasswordExpired,PasswordLastSet
+```
+
 ### Step 4 — Review Authentication Logs
 
 1. Open **Event Viewer**.
@@ -53,7 +50,7 @@ Verify whether the account is:
 4. Search for **Event ID 4625**, which records failed logon events.
 5. Compare the event timestamp, account name, and logon details with the reported incident.
 
-Do not assume unrelated historical failures explain the current incident.
+Check that the timestamps line up with when the user had trouble. Old failures, including your own testing, can look like evidence when they aren't.
 
 ### Step 5 — Perform an Authorized Password Reset
 
@@ -65,7 +62,7 @@ Do not assume unrelated historical failures explain the current incident.
 
 ### Step 6 — Verify Resolution
 
-Ask the employee to sign in successfully and confirm access to required applications.
+Have the employee sign in and confirm they can reach the applications they need.
 
 If successful, record the verification and close the incident. Otherwise, continue troubleshooting or escalate.
 
@@ -79,14 +76,10 @@ Escalate when:
 - Account changes require elevated approval.
 - The issue affects multiple employees.
 
-## Related Lab
-
-[NSIT-1 — Windows Login Investigation](../tickets/NSIT-1-windows-login.md)
-
 ## Security Considerations
 
-Never include passwords, recovery codes, or confidential employee details in tickets or GitHub documentation.
+Never include passwords, recovery codes, or confidential employee details in tickets or documentation.
 
----
+## Related Ticket
 
-*Prepared for a simulated IT support environment.*
+[NSIT-1 — Employee Can't Sign In to Windows](../tickets/NSIT-1-windows-login.md)
