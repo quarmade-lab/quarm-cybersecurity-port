@@ -6,7 +6,7 @@
 **Environment:** Windows Server 2022 / Active Directory  
 **Domain:** quarm.local  
 **Ticketing platform:** Jira Service Management  
-**Ticket reference:** [Insert actual Jira ticket ID]  
+**Ticket reference:** NSIT-1
 **Classification:** Incident  
 **Impact:** Single user  
 **Urgency:** Medium  
