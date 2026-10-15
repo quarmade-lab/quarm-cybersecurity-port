@@ -60,7 +60,11 @@ Planned activities:
 - Review ticket queues and workflows.
 - Establish sample prioritization and SLA targets.
 
-Evidence: ![](../evidence/01-jira-service-desk-created.png)
+#### Jira Service Desk — Initial Setup
+
+Created the Northstar IT Service Desk using Jira Service Management's IT Service Management template.
+
+![Northstar IT Service Desk Dashboard](evidence/01-jira-service-desk-created.png)
 
 ### Phase 2 — Incident and Request Simulation
 
