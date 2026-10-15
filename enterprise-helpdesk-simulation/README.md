@@ -132,6 +132,61 @@ The project uses a simulated business environment. The first incident demonstrat
 
 Additional service request, escalation, and knowledge-base workflows are planned.
 
+## IT Support Ticket Portfolio
+
+This project demonstrates hands-on familiarity with Jira Service Management, ITIL-aligned service desk workflows, Windows troubleshooting, and technical documentation.
+
+The organization and employee scenarios are fictional. Technical findings are supported by controlled Windows lab exercises.
+
+### Jira Service Desk Cases
+
+| Ticket | Scenario | ITIL Practice | Report |
+|---|---|---|---|
+| NSIT-1 | Windows login investigation | Incident Management | [View](tickets/NSIT-1-windows-login.md) |
+| NSIT-2 | New employee onboarding | Service Request Management | [View](tickets/NSIT-2-employee-onboarding.md) |
+| NSIT-3 | Network and DNS troubleshooting | Incident Management | [View](tickets/NSIT-3-network-troubleshooting.md) |
+| NSIT-4 | Windows performance investigation | Incident Management | [View](tickets/NSIT-4-windows-performance.md) |
+| NSIT-5 | Software availability and verification | Service Request Management | [View](tickets/NSIT-5-software-installation.md) |
+| NSIT-6 | Printer troubleshooting | Incident / Problem Management | [View](tickets/NSIT-6-printer-investigation.md) |
+
+### Knowledge Base
+
+- [KB-001 — Active Directory Password Reset](knowledge-base/KB-001-password-reset.md)
+- [KB-002 — Network and DNS Troubleshooting](knowledge-base/KB-002-network-troubleshooting.md)
+- [KB-003 — Windows Printer Troubleshooting](knowledge-base/KB-003-printer-troubleshooting.md)
+
+### Jira Service Management Evidence
+
+**Service Desk Queue**
+
+![Jira service desk queue](evidence/17-jira-service-desk-queue.png)
+
+**SLA Tracking**
+
+![Jira SLA tracking](evidence/18-jira-sla-tracking.png)
+
+### Skills Demonstrated
+
+- Jira Service Management ticket creation, assignment, and tracking
+- ITIL Incident Management
+- ITIL Service Request Management
+- Problem Management concepts
+- Ticket prioritization and escalation
+- SLA monitoring
+- Active Directory account recovery procedures
+- Windows desktop troubleshooting
+- Network and DNS diagnostics
+- Software inventory and functional testing
+- Print Spooler and printer queue investigation
+- Knowledge-base documentation
+- GitHub technical reporting
+
+### Scope and Limitations
+
+This is an independent IT support simulation, not production service desk employment.
+
+Technical exercises were performed in controlled lab environments. Fictional employee incidents remain open or pending where successful user-side resolution could not be verified.
+
 ## Disclaimer
 
 This is an independent training project using fictional employees, simulated tickets, and controlled lab environments. It does not represent employment at Northstar Solutions or production IT support experience.
