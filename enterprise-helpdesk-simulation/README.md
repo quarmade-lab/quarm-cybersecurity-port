@@ -10,7 +10,7 @@ The objective is to demonstrate practical IT support skills using Jira Service M
 **Platform:** Jira Service Management Cloud  
 **Role:** Simulated Tier 1 IT Support Technician  
 **Project Key:** NSIT  
-**Status:** In progress
+**Status:** Completed
 
 ## Business Scenario
 
@@ -64,7 +64,32 @@ Evidence: `evidence/01-jira-service-desk-created.png`
 
 ### Phase 2 — Incident and Request Simulation
 
-Not started.
+**Status:** In progress
+
+#### NSIT-1 — Windows Domain Login Investigation
+
+Created and investigated a simulated Windows authentication incident using Jira Service Management and an existing Active Directory lab.
+
+**Activities performed:**
+- Registered and prioritized an incident in Jira.
+- Investigated an Active Directory test account.
+- Verified account status using PowerShell.
+- Reviewed Windows Security Event ID 4625.
+- Inspected failed-login records in Event Viewer.
+- Performed an administrative password-reset exercise.
+- Documented investigation findings and verification limitations.
+
+**Verified findings:**
+- Account enabled: True
+- Account locked: False
+- Password expired: False
+- Five historical failed-logon events identified on DC01.
+
+**Outcome:** The password-reset exercise was completed. Successful workstation sign-in was not independently verified, and the root cause was not conclusively established.
+
+**Incident report:** [NSIT-1 — Windows Login Investigation](tickets/NSIT-1-windows-login.md)
+
+**Supporting evidence:** [View screenshots](evidence/)
 
 ### Phase 3 — Troubleshooting and Resolution
 
@@ -76,7 +101,32 @@ Not started.
 
 ## Results
 
-To be completed after the ticketing workflows have been tested.
+### Completed Work
+
+- Deployed a simulated IT Service Desk using Jira Service Management.
+- Created and documented the first incident, NSIT-1.
+- Applied incident classification and prioritization.
+- Used Active Directory and PowerShell to investigate account status.
+- Reviewed Windows authentication logs.
+- Performed an administrative password-reset exercise.
+- Captured and organized supporting evidence in GitHub.
+
+### Skills Demonstrated
+
+- IT Service Management
+- ITIL-aligned incident management
+- Jira Service Management
+- Active Directory administration
+- Windows Server troubleshooting
+- PowerShell
+- Windows Event Viewer
+- Technical documentation
+
+### Current Limitations
+
+The project uses a simulated business environment. The first incident demonstrated account investigation and password-reset procedures, but did not verify successful workstation sign-in or conclusively establish the original failure cause.
+
+Additional service request, escalation, and knowledge-base workflows are planned.
 
 ## Disclaimer
 
