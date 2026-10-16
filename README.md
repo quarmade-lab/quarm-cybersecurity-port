@@ -2,11 +2,12 @@
 
 I'm a Computer Science graduate building hands-on labs to get practical with IT support, Windows administration, and security work. This repository is where I document what I set up, what I tested, and what I found, including the things that didn't fully work or that I couldn't verify.
 
-Most of my lab work runs on a Windows Server 2022 domain controller (`DC01`, domain `quarm.local`) in VirtualBox, plus an Ubuntu Server VM and my own Windows 11 laptop.
+Most of my lab work runs on a Windows Server 2022 domain controller (`DC01`, domain `quarm.local`) in VirtualBox, plus an Ubuntu Server VM, my own Windows 11 laptop, and a Microsoft Entra test tenant.
 
 ## What I'm working on
 
 - Active Directory user, group, and permission management
+- Microsoft Entra ID users, groups, admin roles, and authentication settings
 - Help desk ticket handling in Jira Service Management
 - Windows troubleshooting (networking, performance, services, printing)
 - Windows Security log investigation and account lockout policy
@@ -22,6 +23,9 @@ I generated failed logons on my domain controller with `runas`, then traced each
 
 ### [Active Directory Help Desk Lab](active-directory-help-desk-lab/)
 Four common help desk tasks on my domain controller: a password reset, disabling and re-enabling an account, adding a user to a VPN access group, and setting share and NTFS permissions on a Finance shared folder.
+
+### [Microsoft Entra ID Administration](microsoft-entra-id-administration/)
+In my own Entra tenant, I created five test users and four security groups for a fictional company. I reset a password and confirmed it in the audit logs, and assigned the Helpdesk Administrator role as a direct assignment. I also onboarded a new hire, and offboarded a departing user by disabling the account, removing group membership, and revoking sessions. Along the way I reviewed authentication method policies and confirmed security defaults were on. All of this was checked from the admin side; I didn't sign in as the test users or test Conditional Access.
 
 ### [Windows and Linux Fundamentals](windows-linux-fundamentals/)
 Notes from practicing core admin tasks on Windows and on a command-line-only Ubuntu Server VM: services, users, permissions, packages, and logs, plus a quick-reference cheat sheet.
