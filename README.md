@@ -2,7 +2,7 @@
 
 I'm a Computer Science graduate building hands-on labs to get practical with IT support, Windows administration, and security work. This repository is where I document what I set up, what I tested, and what I found, including the things that didn't fully work or that I couldn't verify.
 
-Most of my lab work runs on a Windows Server 2022 domain controller (`DC01`, domain `quarm.local`) in VirtualBox, plus an Ubuntu Server VM, my own Windows 11 laptop, a Microsoft Entra test tenant, and an Azure subscription.
+Most of my lab work runs on a Windows Server 2022 domain controller (`DC01`, domain `quarm.local`) in VirtualBox, plus an Ubuntu Server VM, my own Windows 11 laptop, a Microsoft Entra test tenant, an Azure subscription, and a ServiceNow Personal Developer Instance.
 
 ## What I'm working on
 
@@ -10,6 +10,7 @@ Most of my lab work runs on a Windows Server 2022 domain controller (`DC01`, dom
 - Microsoft Entra ID users, groups, admin roles, and authentication settings
 - Azure RBAC role assignments and storage account security settings
 - Help desk ticket handling in Jira Service Management
+- ServiceNow ITSM: incidents, SLAs, problems, knowledge, catalog requests, and changes
 - Windows troubleshooting (networking, performance, services, printing)
 - Windows Security log investigation and account lockout policy
 - Linux command-line basics and `journalctl`
@@ -30,6 +31,9 @@ In my own Entra tenant, I created five test users and four security groups for a
 
 ### [Azure RBAC & Storage Security Lab](azure-rbac-storage-security-lab/)
 A separate lab on Azure resource access, as opposed to Entra directory roles. I deployed a resource group, storage account, and private Blob container, then gave a test user the Contributor role on the resource group. With that role, the user could write tags on the resource group, where an earlier attempt had been denied. When the user opened the Blob container, the portal showed an authorization error, which I used to work through how Azure management permissions differ from Blob data permissions. I also reviewed the storage account's security settings, the Activity Log, and the cost (under CA$0.01), then removed the role, deleted the user, and deleted the resource group.
+
+### [ServiceNow ITSM Service Desk Lab](servicenow-itsm-service-desk-lab/)
+In a ServiceNow Personal Developer Instance, I set up users and an NS Service Desk group for the same fictional company, and gave the team the `itil` role through the group so members inherit it. I logged six incidents with priorities based on impact and urgency, and worked one from New to Resolved with internal work notes and customer updates. Along the way I watched its SLAs, as well as a P1 email outage whose 15-minute response SLA breached. I also opened a problem record for a recurring printer issue, published three knowledge articles, fulfilled an approved catalog request (REQ, RITM, and SCTASK), raised a standard change, and built a small reporting dashboard. The records are real; the troubleshooting outcomes are simulated. The P1 outage and the printer problem were not resolved.
 
 ### [Windows and Linux Fundamentals](windows-linux-fundamentals/)
 Notes from practicing core admin tasks on Windows and on a command-line-only Ubuntu Server VM: services, users, permissions, packages, and logs, plus a quick-reference cheat sheet.
