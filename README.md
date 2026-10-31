@@ -9,6 +9,7 @@ Most of my lab work runs on a Windows Server 2022 domain controller (`DC01`, dom
 - Active Directory user, group, and permission management
 - Microsoft Entra ID users, groups, admin roles, and authentication settings
 - Azure RBAC role assignments and storage account security settings
+- Windows Server administration on an Azure VM with PowerShell
 - Help desk ticket handling in Jira Service Management
 - ServiceNow ITSM: incidents, SLAs, problems, knowledge, catalog requests, and changes
 - Windows troubleshooting (networking, performance, services, printing)
@@ -31,6 +32,9 @@ In my own Entra tenant, I created five test users and four security groups for a
 
 ### [Azure RBAC & Storage Security Lab](azure-rbac-storage-security-lab/)
 A separate lab on Azure resource access, as opposed to Entra directory roles. I deployed a resource group, storage account, and private Blob container, then gave a test user the Contributor role on the resource group. With that role, the user could write tags on the resource group, where an earlier attempt had been denied. When the user opened the Blob container, the portal showed an authorization error, which I used to work through how Azure management permissions differ from Blob data permissions. I also reviewed the storage account's security settings, the Activity Log, and the cost (under CA$0.01), then removed the role, deleted the user, and deleted the resource group.
+
+### [Azure Windows Server Administration Lab](azure-windows-server-lab/)
+I deployed a Windows Server 2025 VM in Azure, connected over RDP, and did the admin work in PowerShell: verified the OS, created a local user, installed updates and reviewed hotfixes, and installed the IIS role. I simulated a Print Spooler outage by stopping the service, confirmed it was stopped, started it again, and verified it was running. I also checked performance in Task Manager, Resource Monitor, and Azure Monitor metrics, reviewed the System log in Event Viewer, and deleted the resource group when I was done.
 
 ### [ServiceNow ITSM Service Desk Lab](servicenow-itsm-service-desk-lab/)
 In a ServiceNow Personal Developer Instance, I set up users and an NS Service Desk group for the same fictional company, and gave the team the `itil` role through the group so members inherit it. I logged six incidents with priorities based on impact and urgency, and worked one from New to Resolved with internal work notes and customer updates. Along the way I watched its SLAs, as well as a P1 email outage whose 15-minute response SLA breached. I also opened a problem record for a recurring printer issue, published three knowledge articles, fulfilled an approved catalog request (REQ, RITM, and SCTASK), raised a standard change, and built a small reporting dashboard. The records are real; the troubleshooting outcomes are simulated. The P1 outage and the printer problem were not resolved.
