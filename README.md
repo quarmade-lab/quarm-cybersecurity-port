@@ -2,7 +2,7 @@
 
 I'm a Computer Science graduate building hands-on labs to get practical with IT support, Windows administration, and security work. This repository is where I document what I set up, what I tested, and what I found, including the things that didn't fully work or that I couldn't verify.
 
-Most of my lab work runs on a Windows Server 2022 domain controller (`DC01`, domain `quarm.local`) in VirtualBox, plus an Ubuntu Server VM, my own Windows 11 laptop, a Microsoft Entra test tenant, an Azure subscription, and a ServiceNow Personal Developer Instance.
+Most of my lab work runs on a Windows Server 2022 domain controller (`DC01`, domain `quarm.local`) in VirtualBox, plus an Ubuntu Server VM, my own Windows 11 laptop, a Microsoft Entra test tenant, an Azure subscription, a ServiceNow Personal Developer Instance, and a Salesforce Trailhead Playground.
 
 ## What I'm working on
 
@@ -12,6 +12,7 @@ Most of my lab work runs on a Windows Server 2022 domain controller (`DC01`, dom
 - Windows Server administration on an Azure VM with PowerShell
 - Help desk ticket handling in Jira Service Management
 - ServiceNow ITSM: incidents, SLAs, problems, knowledge, catalog requests, and changes
+- Salesforce administration: custom objects, Lightning pages, Quick Actions, and Flow
 - Windows troubleshooting (networking, performance, services, printing)
 - Windows Security log investigation and account lockout policy
 - Linux command-line basics and `journalctl`
@@ -38,6 +39,9 @@ I deployed a Windows Server 2025 VM in Azure, connected over RDP, and did the ad
 
 ### [ServiceNow ITSM Service Desk Lab](servicenow-itsm-service-desk-lab/)
 In a ServiceNow Personal Developer Instance, I set up users and an NS Service Desk group for the same fictional company, and gave the team the `itil` role through the group so members inherit it. I logged six incidents with priorities based on impact and urgency, and worked one from New to Resolved with internal work notes and customer updates. Along the way I watched its SLAs, as well as a P1 email outage whose 15-minute response SLA breached. I also opened a problem record for a recurring printer issue, published three knowledge articles, fulfilled an approved catalog request (REQ, RITM, and SCTASK), raised a standard change, and built a small reporting dashboard. The records are real; the troubleshooting outcomes are simulated. The P1 outage and the printer problem were not resolved.
+
+### [Salesforce IT Service Desk Pro](salesforce-it-service-desk-pro/)
+In a Salesforce Trailhead Playground, I built a small IT help desk app with two custom objects, Support Ticket and IT Asset, linked to employees, technicians, and devices through lookup fields. I set up a sectioned page layout, a Lightning record page, three Quick Actions (escalate, resolve, and update), two record-triggered Flows, three ticket reports, and a dashboard. It's all point-and-click configuration, with no code. Both Flows are active, but I haven't yet captured a test showing either one changing a record, and the dashboard charts don't yet show on the custom home page.
 
 ### [Windows and Linux Fundamentals](windows-linux-fundamentals/)
 Notes from practicing core admin tasks on Windows and on a command-line-only Ubuntu Server VM: services, users, permissions, packages, and logs, plus a quick-reference cheat sheet.
